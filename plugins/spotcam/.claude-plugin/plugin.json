@@ -1,0 +1,10 @@
+{
+  "name": "spotcam",
+  "version": "1.1.0",
+  "description": "Your SpotCam cameras in Claude: list cameras, view their latest images, export recordings, and pick the AI detection plans that fit (sign in with your SpotCam account).",
+  "author": {
+    "name": "SpotCam"
+  },
+  "homepage": "https://github.com/SpotCam-Cloud/spotcam-plugins",
+  "license": "MIT"
+}

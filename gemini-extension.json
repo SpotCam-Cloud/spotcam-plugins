@@ -1,0 +1,12 @@
+{
+  "name": "spotcam",
+  "version": "1.1.0",
+  "mcpServers": {
+    "spotcam": {
+      "httpUrl": "https://mcp.myspotcam.com/mcp",
+      "oauth": {
+        "enabled": true
+      }
+    }
+  }
+}
