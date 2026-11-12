@@ -49,5 +49,5 @@ Connect me to the SpotCam MCP server:
 ## More
 
 - [User guide](docs/user-guide.md): what you can ask, which cameras are visible, revoking access, troubleshooting.
-- [Privacy policy](https://mcp.myspotcam.com/privacy) (draft, pending legal review; source: [PRIVACY.md](PRIVACY.md)).
+- [Privacy policy](https://www.myspotcam.com/en/welcome/privacy/) (SpotCam's privacy policy, which covers this service).
 - License: MIT ([LICENSE](LICENSE)); the SpotCam name and logo are not covered.
