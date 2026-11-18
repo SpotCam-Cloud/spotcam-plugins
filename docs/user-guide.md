@@ -7,9 +7,9 @@ of a moment.
 
 - **Server URL:** `https://mcp.myspotcam.com/mcp`
 - **Sign-in:** your SpotCam email and password, in your browser (OAuth). No API key.
-- **Access:** the assistant cannot change camera settings, move cameras or
-  delete recordings. It can create video exports in your My Film storage,
-  event notifications and plan subscription requests, and only when you ask.
+- **Access:** the assistant cannot change camera settings, move cameras,
+  delete recordings, or subscribe, change or pay for plans. It creates video
+  exports in your My Film storage, and only when you ask.
 
 ## What you can ask
 
@@ -19,8 +19,7 @@ of a moment.
 - "Show me the living room at 3:15 pm yesterday."
 - "Make a one-minute clip of the driveway from 8:00 this morning."
 - "Make a time-lapse of the garden for today."
-- "Tell me when the baby camera hears crying." (Claude, with a Claude Routine)
-- "Which AI detection plan would tell me when a car parks in front of the house?"
+- "Wait two minutes and tell me if someone walks into the hallway."
 - "Which plan is each of my cameras on?"
 
 ## Tools
@@ -33,17 +32,30 @@ of a moment.
 | `get_timeline_sheet`, `get_frame`, `get_frames_at` | Look back through a camera's recordings: an overview sheet of a period, or the frames at given times. |
 | `export_video_clip`, `export_timelapse` | Create a video clip or a time-lapse from the recordings, saved to your My Film storage. |
 | `get_export_progress`, `list_exports`, `get_export_frames` | Follow an export, list your exports with links to play or download them, and look at frames of an exported video. |
-| `wait_for_event` | Wait up to a few minutes for a camera to detect something. |
-| `create_event_trigger`, `list_event_triggers`, `delete_event_trigger` | Notify a Claude Routine when a camera detects the events you chose (Claude only). |
+| `wait_for_event` | Wait in the conversation for a camera to detect a person or motion (up to a few minutes in most apps). |
 | `list_subscriptions` | The plan each camera you own is on and when it renews. |
-| `list_plans` | SpotCam's cloud recording and AI detection plans with prices; for one camera, the AI plans it can have, what each includes, and which it already has. |
-| `subscribe_plan` | Records a subscription request for a plan you chose. During the current test phase nothing is charged. Not offered in ChatGPT. |
 | `submit_feedback` | Sends your bug report or suggestion to the SpotCam team. |
 
-Recordings, events, exports and plans are available for cameras you **own**;
-shared cameras give their list entry and latest image only. Some tools are
-being rolled out: if your assistant does not list one yet, it is not
-available on your account.
+Recordings, events and exports are available for cameras you **own**;
+shared cameras give their list entry and latest image only.
+
+## Usage limits
+
+Each camera has usage limits. Every camera is currently on the **Free** limits:
+
+| Per camera | Free |
+|---|---|
+| Calls about the camera | 5 a minute, 100 a day |
+| Images and video sent | 200 MB a month |
+| Video clips | 2 a day, up to 3 minutes each |
+| Time-lapses | 1 a month |
+| Waiting for events | 1 wait at a time |
+
+When a limit is reached, the assistant is told which limit, when it resets
+(days are counted in Taipei time, UTC+8), and, for a camera you own, its
+current plan and a link to that camera's page on the SpotCam website. Nothing
+is charged and no plan changes unless you subscribe on the website yourself.
+Each account counts separately, also for a camera shared with several people.
 
 ## Set up
 
@@ -105,6 +117,7 @@ Run `/reload-plugins`, open `/mcp`, choose the SpotCam server and select
 | "Camera not found or you do not have access to it" | Ask the assistant to list your cameras and use one of those. |
 | "No preview available: the camera is not online" | The camera is offline or asleep; previews of shared cameras need the camera online. |
 | A recording or export tool says the time is outside the recordings | Ask for a time within the camera's recording days (see `list_subscriptions`). |
+| "Limit reached" | The answer says which limit and when it resets; wait until then. |
 | An export says My Film storage is full | Delete old videos in the SpotCam app, then try again. |
 | The assistant says it needs sign-in | Reconnect: in Claude Code run `/mcp` and choose Authenticate; in claude.ai select Connect on the connector. |
 
@@ -117,6 +130,6 @@ Privacy: <https://mcp.myspotcam.com/privacy>.
 
 1. 在 <https://claude.ai/customize/connectors> 新增自訂 connector，網址填 `https://mcp.myspotcam.com/mcp`。
 2. 按 Connect，用 SpotCam 帳號登入並按允許。
-3. 在對話中問「列出我的攝影機」「門口攝影機現在畫面如何」「今天下午有沒有人來過」「幫我把車道早上 8 點的一分鐘做成影片」或「我想知道有車停在門口，要訂哪個 AI 方案」。
+3. 在對話中問「列出我的攝影機」「門口攝影機現在畫面如何」「今天下午有沒有人來過」「幫我把車道早上 8 點的一分鐘做成影片」或「等兩分鐘，走道有人就告訴我」。
 
-AI 助理不能改攝影機設定、不能刪錄影；只有在你要求時，才會建立匯出影片、事件通知或訂閱請求（目前測試階段不會扣款）。要撤銷授權，請到 <https://mcp.myspotcam.com/oauth/account>。
+AI 助理不能改攝影機設定、不能刪錄影，也不能訂閱、變更或付費購買方案；只有在你要求時才會建立匯出影片。每台攝影機目前都適用 Free 額度（每台每天 100 次呼叫、每月 200 MB、每天 2 段 3 分鐘內的影片、每月 1 支縮時、同時 1 個等待），用完時 AI 會說明何時重置。要撤銷授權，請到 <https://mcp.myspotcam.com/oauth/account>。
